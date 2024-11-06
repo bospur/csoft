@@ -1,0 +1,31 @@
+.titleWrap {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 64px 48px;
+
+    .title {
+        h1 {
+            font-size: 54px;
+            
+        }
+
+        h3 {
+            font-size: 28px;
+            
+        }
+    }
+
+    .logo {
+        h2 {
+            font-size: 54px;
+            
+        }
+
+        p {
+            font-size: 28px;
+            
+        }
+    }
+}
