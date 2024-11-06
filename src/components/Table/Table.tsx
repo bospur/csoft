@@ -43,6 +43,13 @@ const useStyles = makeStyles({
     flexDirection: "column",
     gap: 10,
   },
+  columnHeaderWrapper: {
+    display: "flex",
+    alignItems: "center",
+  },
+  columnHeaderSelect: {
+    maxWidth: 200,
+  },
 });
 
 type Column = {
@@ -52,32 +59,6 @@ type Column = {
 };
 
 type Row = Record<string, string | number>;
-
-const INITIAL_COLUMNS = [
-  {
-    id: uuidv4(),
-    name: "Колонка 1",
-    type: "string",
-  },
-  {
-    id: uuidv4(),
-    name: "Колонка 2",
-    type: "number",
-  },
-];
-
-const INITIAL_ROWS = [
-  // {
-  //   id: uuidv4(),
-  //   column1: "sssss",
-  //   column2: 5,
-  // },
-  // {
-  //   id: uuidv4(),
-  //   column1: "фффф",
-  //   column2: 10,
-  // },
-];
 
 const getColumnsDecs = (column: Column) =>
   column.type === "string" ? "" : "(%)";
@@ -163,7 +144,7 @@ export const Table = () => {
                   key={column.id}
                 >
                   {isEdit ? (
-                    <>
+                    <div className={classes.columnHeaderWrapper}>
                       <Input
                         value={column.name}
                         onChange={(e: ChangeEvent<HTMLInputElement>) =>
@@ -192,12 +173,12 @@ export const Table = () => {
                             })
                           )
                         }
-                        className={classes.select}
+                        className={classes.columnHeaderSelect}
                       >
                         <MenuItem value="string">Строка</MenuItem>
                         <MenuItem value="number">Проценты</MenuItem>
                       </Select>
-                    </>
+                    </div>
                   ) : (
                     `${column.name}${getColumnsDecs(column)}`
                   )}
