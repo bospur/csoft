@@ -98,7 +98,7 @@ export const Table = () => {
   const handleEdit = () => {
     setIsEdit(!isEdit);
   };
-  const handleChangeColumnSelect = () => setDialogSate;
+
   const handleAddColumn = () => {
     const newColumns = [
       ...columns,
@@ -163,20 +163,41 @@ export const Table = () => {
                   key={column.id}
                 >
                   {isEdit ? (
-                    <Input
-                      value={column.name}
-                      onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                        setColumns(
-                          columns.map((editColum) => {
-                            if (editColum.id === column.id) {
-                              editColum.name = e.target.value;
-                            }
+                    <>
+                      <Input
+                        value={column.name}
+                        onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                          setColumns(
+                            columns.map((editColum) => {
+                              if (editColum.id === column.id) {
+                                editColum.name = e.target.value;
+                              }
 
-                            return editColum;
-                          })
-                        )
-                      }
-                    />
+                              return editColum;
+                            })
+                          )
+                        }
+                      />
+                      <Select
+                        id="demo-simple-select"
+                        value={column.type}
+                        onChange={(e) =>
+                          setColumns(
+                            columns.map((editColum) => {
+                              if (editColum.id === column.id) {
+                                editColum.type = String(e.target.value);
+                              }
+
+                              return editColum;
+                            })
+                          )
+                        }
+                        className={classes.select}
+                      >
+                        <MenuItem value="string">Строка</MenuItem>
+                        <MenuItem value="number">Проценты</MenuItem>
+                      </Select>
+                    </>
                   ) : (
                     `${column.name}${getColumnsDecs(column)}`
                   )}
